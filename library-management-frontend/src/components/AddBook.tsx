@@ -2,25 +2,37 @@ import React, { useState } from 'react';
 import { createBook } from '../services/bookService';
 import { toast } from 'react-hot-toast';
 
+// Define the Book interface for better type safety
+interface Book {
+    title: string;
+    author: string;
+    ISBN: string;
+    publishedDate: string;
+    genre: "Fiction" | "Non-Fiction" | "Academic" | "Biography" | "Science";
+    copiesAvailable: number;
+}
+
 interface AddBookProps {
     onUpdate: () => void;
 }
 
 const AddBook: React.FC<AddBookProps> = ({ onUpdate }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [newBook, setNewBook] = useState({
+    
+    // Define the newBook state with the correct Book type
+    const [newBook, setNewBook] = useState<Book>({
         title: '',
         author: '',
         ISBN: '',
         publishedDate: '',
-        genre: 'Fiction',
+        genre: 'Fiction',  // Default genre value should match the type "Fiction"
         copiesAvailable: 1
     });
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await createBook(newBook);
+            await createBook(newBook); // Type is now correctly passed
             toast.success('Book added successfully');
             setIsOpen(false);
             setNewBook({
@@ -28,7 +40,7 @@ const AddBook: React.FC<AddBookProps> = ({ onUpdate }) => {
                 author: '',
                 ISBN: '',
                 publishedDate: '',
-                genre: 'Fiction',
+                genre: 'Fiction', // Reset to the default genre
                 copiesAvailable: 1
             });
             onUpdate();
@@ -96,7 +108,7 @@ const AddBook: React.FC<AddBookProps> = ({ onUpdate }) => {
                     <label className="block text-sm font-medium text-gray-700">Genre</label>
                     <select
                         value={newBook.genre}
-                        onChange={(e) => setNewBook({ ...newBook, genre: e.target.value })}
+                        onChange={(e) => setNewBook({ ...newBook, genre: e.target.value as Book["genre"] })}
                         required
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     >
@@ -139,4 +151,4 @@ const AddBook: React.FC<AddBookProps> = ({ onUpdate }) => {
     );
 };
 
-export default AddBook; 
+export default AddBook;

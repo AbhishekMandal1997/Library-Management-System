@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { BookOpen, Menu, Bell, User, LogOut } from 'lucide-react';
+import { BookOpen, Menu, Bell, LogOut } from 'lucide-react';
 import { useState } from 'react';
 
 const MainLayout: React.FC = () => {
