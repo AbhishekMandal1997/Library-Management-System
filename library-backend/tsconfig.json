@@ -2,15 +2,13 @@
   "compilerOptions": {
     "target": "es2018",
     "module": "commonjs",
-    "lib": [
-      "es2018",
-      "esnext.asynciterable"
-    ],
-    "skipLibCheck": true,
-    "sourceMap": true,
+    "lib": ["es2018", "esnext.asynciterable"],
     "outDir": "./dist",
+    "rootDir": "./src",
     "moduleResolution": "node",
+    "sourceMap": true,
     "removeComments": true,
+    "skipLibCheck": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
@@ -26,10 +24,6 @@
     "resolveJsonModule": true,
     "baseUrl": "."
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "./src/**/*.ts"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }
